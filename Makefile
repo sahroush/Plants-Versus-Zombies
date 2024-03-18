@@ -1,25 +1,25 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -w #-fsanitize=address -fsanitize=undefined
+CXXFLAGS = -std=c++17 -Wall -Wextra -I./include #-fsanitize=address -fsanitize=undefined
 LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-SRC_FILES = $(wildcard ./src/*.cpp)
-OBJ_FILES = $(SRC_FILES:./src/%.cpp=./obj/%.o)
-BIN_NAME = bin/pvz
-HDR_FILES := $(wildcard ./src/*.hpp)
+SRCDIR = src
+OBJDIR = obj
+SOURCES := $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SOURCES))
+BINDIR = .
+EXECUTABLE = $(BINDIR)/quizMaker
 MEDIA_PATH = ./files/
 
-.PHONY: clean
-.PHONY: run
+all: $(EXECUTABLE)
 
-$(BIN_NAME): $(OBJ_FILES) $(HDR_FILES)
-	mkdir -p ./bin
-	$(CXX) $(OBJ_FILES) $(CXXFLAGS) $(LFLAGS) -o $(BIN_NAME) -L$(MEDIA_PATH)
+$(EXECUTABLE): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(LFLAGS) -o $@ $^ -L$(MEDIA_PATH)
 
 ./obj/%.o: ./src/%.cpp
 	mkdir -p ./obj
 	$(CXX) $(CXXFLAGS) $(LFLAGS) -c $< -o $@ -I$(MEDIA_PATH)
 
-clean:
-	rm -rf ./obj $(BIN_NAME)
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) $(LFLAGS) -c $< -o $@ -I$(MEDIA_PATH)
 
-run: $(BIN_NAME)
-	$(BIN_NAME) 
+clean:
+	rm -rf $(OBJDIR)/*.o $(EXECUTABLE)
