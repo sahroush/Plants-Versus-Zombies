@@ -22,5 +22,11 @@ public:
 
 private:
   State state;
-  
+  void update();
+  void render();
+  void handle_events();
+  void handle_key_up(Keyboard::Key key);
+  void handle_key_down(Keyboard::Key key);
+  void handle_mouse_press(Event ev);
+  void handle_mouse_release(Event ev);
 };
