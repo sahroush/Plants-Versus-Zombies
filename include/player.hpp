@@ -8,16 +8,14 @@ public:
     Player(int x, int y);
     ~Player();
     void render(RenderWindow &window);
-    void update();
-    void handle_key_down(Keyboard::Key key);
+    void update(Vector2i pos);
+    void handle_mouse_press(Vector2i pos);
+    void handle_mouse_release(Vector2i pos);
     
 private:
     Texture texture;
     Sprite sprite;
     IntRect rect;
     Vector2f pos;
-    void go_left();
-    void go_right();
-    void go_up();
-    void go_down();
+    bool is_tagged = false;
 };

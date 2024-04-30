@@ -51,9 +51,10 @@ void System::handle_events() {
 }
 
 void System::update() {
+  Vector2i pos = Mouse::getPosition(window);
   switch (state) {
   case (IN_GAME):
-    player->update();
+    player->update(pos);
     break;
   case (PAUSE_MENU):
     break;
@@ -103,7 +104,6 @@ void System::handle_key_up(Keyboard::Key key) {
 void System::handle_key_down(Keyboard::Key key) {
   switch (state) {
   case (IN_GAME):
-    player->handle_key_down(key);
     break;
   case (PAUSE_MENU):
     break;
@@ -119,9 +119,10 @@ void System::handle_key_down(Keyboard::Key key) {
 void System::handle_mouse_press(Event ev) {
   if (ev.mouseButton.button == Mouse::Right)
     return;
-  Vector2f pos = {ev.mouseButton.x, ev.mouseButton.y};
+  Vector2i pos = {ev.mouseButton.x, ev.mouseButton.y};
   switch (state) {
   case (IN_GAME):
+    player->handle_mouse_press(pos);
     break;
   case (PAUSE_MENU):
     break;
@@ -137,9 +138,10 @@ void System::handle_mouse_press(Event ev) {
 void System::handle_mouse_release(Event ev) {
   if (ev.mouseButton.button == Mouse::Right)
     return;
-  Vector2f pos = {ev.mouseButton.x, ev.mouseButton.y};
+  Vector2i pos = {ev.mouseButton.x, ev.mouseButton.y};
   switch (state) {
   case (IN_GAME):
+    player->handle_mouse_release(pos);
     break;
   case (PAUSE_MENU):
     break;
