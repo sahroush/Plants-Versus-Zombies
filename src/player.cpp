@@ -4,9 +4,16 @@ const int v = 5;
 
 Player::Player(int x, int y){
     pos = Vector2f(x, y);
-    circle.setRadius(50);
-    circle.setPosition(pos);
-    circle.setFillColor(Color::Yellow);
+    if (!texture.loadFromFile(PICS_PATH + "peashooter.png")) {
+        debug("failed to load player texture");
+    }
+    rect.top = 2;
+    rect.left = 0;
+    rect.width = 30;
+    rect.height = 32;
+    sprite.setTexture(texture);
+    sprite.setTextureRect(rect);
+    sprite.setScale(2, 2);
 }
 
 Player::~Player(){
@@ -30,11 +37,11 @@ void Player::go_down(){
 }
 
 void Player::render(RenderWindow &window){
-    window.draw(circle);
+    window.draw(sprite);
 }
 
 void Player::update(){
-    circle.setPosition(pos);
+    sprite.setPosition(pos);
 }
 
 void Player::handle_key_down(Keyboard::Key key){

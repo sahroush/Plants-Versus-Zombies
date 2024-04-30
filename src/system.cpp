@@ -5,9 +5,15 @@ System::System(int width, int height) {
   window.setFramerateLimit(FRAME_RATE);
   state = IN_GAME;
   player = new Player(100, 100);
+  if (!backgroundTexture.loadFromFile(PICS_PATH + "bg.png")) {
+    debug("failed to load image");
+  }
+  backgroundSprite.setTexture(backgroundTexture);
 }
 
-System::~System() {}
+System::~System() {
+    delete player;
+}
 
 void System::run() {
   while (window.isOpen() and state != EXIT) {
@@ -64,6 +70,7 @@ void System::render() {
   window.clear();
   switch (state) {
   case (IN_GAME):
+    window.draw(backgroundSprite);
     player->render(window);
     break;
   case (PAUSE_MENU):

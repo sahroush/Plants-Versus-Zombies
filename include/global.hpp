@@ -18,8 +18,8 @@ using namespace sf;
 using namespace std;
 
 const float PI = acos(-1);
-const int WIDTH = 1200;
-const int HEIGHT = 900;
+const int WIDTH = 1400;
+const int HEIGHT = 600;
 const int FRAME_RATE = 144;
 const string PICS_PATH = "./files/pics/", AUDIO_PATH = "./files/audio/",
              FONTS_PATH = "./files/fonts/";

@@ -22,6 +22,8 @@ public:
 private:
   State state;
   Player* player;
+  Texture backgroundTexture;
+  Sprite backgroundSprite;
   void update();
   void render();
   void handle_events();

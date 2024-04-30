@@ -12,7 +12,9 @@ public:
     void handle_key_down(Keyboard::Key key);
     
 private:
-    CircleShape circle;
+    Texture texture;
+    Sprite sprite;
+    IntRect rect;
     Vector2f pos;
     void go_left();
     void go_right();
