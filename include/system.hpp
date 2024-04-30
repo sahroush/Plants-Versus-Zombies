@@ -2,6 +2,7 @@
 
 #include "global.hpp"
 #include "player.hpp"
+#include "projectile.hpp"
 
 enum State {
   IN_GAME,

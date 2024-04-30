@@ -1,6 +1,7 @@
 #pragma once
 
 #include "global.hpp"
+#include "projectile.hpp"
 
 
 class Player{
@@ -18,4 +19,6 @@ private:
     IntRect rect;
     Vector2f pos;
     bool is_tagged = false;
+    vector < Projectile* > projectiles;
+    int internal_clock = 0;
 };
