@@ -24,6 +24,7 @@ private:
   Player* player;
   Texture backgroundTexture;
   Sprite backgroundSprite;
+  Music music;
   void update();
   void render();
   void handle_events();

@@ -9,6 +9,11 @@ System::System(int width, int height) {
     debug("failed to load image");
   }
   backgroundSprite.setTexture(backgroundTexture);
+  if (!music.openFromFile(AUDIO_PATH + "bg.ogg")){
+    debug("failed to load music");
+  }
+  music.setLoop(true);
+  //music.play();
 }
 
 System::~System() {
