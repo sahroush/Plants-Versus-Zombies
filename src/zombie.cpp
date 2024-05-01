@@ -25,3 +25,7 @@ void Zombie::update(){
     pos.x -= speed;
     sprite.setPosition(pos);
 }
+
+FloatRect Zombie::get_rect(){
+    return sprite.getGlobalBounds();
+}

@@ -25,3 +25,7 @@ void Projectile::update(){
 bool Projectile::is_out(){
     return sprite.getPosition().x > WIDTH + 50;
 }
+
+FloatRect Projectile::get_rect(){
+    return sprite.getGlobalBounds();
+}

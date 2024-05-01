@@ -9,6 +9,7 @@ public:
     void render(RenderWindow &window);
     void update();
     bool is_out();
+    FloatRect get_rect();
 private:
     const int speed = 4;
     Texture texture;

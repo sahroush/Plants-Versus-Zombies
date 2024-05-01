@@ -20,4 +20,5 @@ private:
     void add_projectile();
     void delete_out_of_bounds();
     void add_zombie();
+    void handle_collision();
 };

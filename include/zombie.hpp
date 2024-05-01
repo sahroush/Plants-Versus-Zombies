@@ -8,6 +8,7 @@ public:
     ~Zombie();
     void render(RenderWindow &window);
     void update();
+    FloatRect get_rect();
 private:
     const float speed = 1.2;
     Texture texture;

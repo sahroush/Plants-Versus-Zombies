@@ -20,7 +20,7 @@ void Handler::update(){
         add_projectile();
     }
     Time zelapsed = zombie_clock.getElapsedTime();
-    if(zelapsed.asMilliseconds() >= 1200){
+    if(zelapsed.asMilliseconds() >= 700){
         zombie_clock.restart();
         add_zombie();
     }
@@ -31,6 +31,7 @@ void Handler::update(){
         z->update();
     }
     delete_out_of_bounds();
+    handle_collision();
 }
 
 void Handler::delete_out_of_bounds(){
@@ -64,4 +65,27 @@ void Handler::add_projectile(){
 void Handler::add_zombie(){
     Zombie* z = new Zombie(Vector2f(WIDTH, rng()%HEIGHT - 60));
     zombies.push_back(z);
+}
+
+void Handler::handle_collision(){
+    vector <Projectile*> trashp;
+    vector <Zombie*> trashz;
+    for(auto p : projectiles){
+        for(auto z : zombies){
+            FloatRect z_rect = z->get_rect();
+            FloatRect p_rect = p->get_rect();
+            if(z_rect.intersects(p_rect)){
+                trashp.push_back(p);
+                trashz.push_back(z);
+            }
+        }   
+    }
+    for(auto p : trashp){
+        projectiles.erase(remove(projectiles.begin(), projectiles.end(), p), projectiles.end());   
+        delete p;
+    }
+    for(auto z : trashz){
+        zombies.erase(remove(zombies.begin(), zombies.end(), z), zombies.end());   
+        delete z;
+    }
 }
