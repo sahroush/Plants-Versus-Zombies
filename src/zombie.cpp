@@ -22,6 +22,16 @@ void Zombie::render(RenderWindow &window){
 }
 
 void Zombie::update(){
+    Time elapsed = clock.getElapsedTime();
+    if(elapsed.asMilliseconds() >= 300){
+        clock.restart();
+        cur_rect = (cur_rect + 1) % 3;
+        IntRect rect;
+        rect.width = 34; 
+        rect.height = 62;
+        rect.left = poses[cur_rect];
+        sprite.setTextureRect(rect);
+    }
     pos.x -= speed;
     sprite.setPosition(pos);
 }
