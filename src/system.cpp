@@ -13,11 +13,13 @@ System::System(int width, int height) {
     debug("failed to load music");
   }
   music.setLoop(true);
-  music.play();
+  //music.play();
+  handler = new Handler(player);
 }
 
 System::~System() {
     delete player;
+    delete handler;
 }
 
 void System::run() {
@@ -60,6 +62,7 @@ void System::update() {
   switch (state) {
   case (IN_GAME):
     player->update(pos);
+    handler->update();
     break;
   case (PAUSE_MENU):
     break;
@@ -78,6 +81,7 @@ void System::render() {
   case (IN_GAME):
     window.draw(backgroundSprite);
     player->render(window);
+    handler->render(window);
     break;
   case (PAUSE_MENU):
     break;

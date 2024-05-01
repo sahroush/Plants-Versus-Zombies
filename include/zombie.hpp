@@ -2,15 +2,14 @@
 
 #include "global.hpp"
 
-class Projectile{
+class Zombie
 public:
-    Projectile(Vector2f pos);
-    ~Projectile();
+    Zombie(Vector2f pos);
+    ~Zombie();
     void render(RenderWindow &window);
     void update();
-    bool is_out();
 private:
-    const int speed = 4;
+    const int speed = 3;
     Texture texture;
     Sprite sprite;
     Vector2f pos;

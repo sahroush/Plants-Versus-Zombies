@@ -1,7 +1,7 @@
 #include "projectile.hpp"
 
-Projectile::Projectile(int x, int y){
-    pos = Vector2f(x, y);
+Projectile::Projectile(Vector2f p){
+    pos = p;
     if (!texture.loadFromFile(PICS_PATH + "tir.png")) {
         debug("failed to load player texture");
     }
@@ -20,4 +20,8 @@ void Projectile::render(RenderWindow &window){
 void Projectile::update(){
     pos.x += speed;
     sprite.setPosition(pos);
+}
+
+bool Projectile::is_out(){
+    return sprite.getPosition().x > WIDTH + 50;
 }

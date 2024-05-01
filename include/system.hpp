@@ -3,6 +3,7 @@
 #include "global.hpp"
 #include "player.hpp"
 #include "projectile.hpp"
+#include "handler.hpp"
 
 enum State {
   IN_GAME,
@@ -22,6 +23,7 @@ public:
 
 private:
   State state;
+  Handler* handler;
   Player* player;
   Texture backgroundTexture;
   Sprite backgroundSprite;

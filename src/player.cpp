@@ -27,7 +27,20 @@ void Player::update(Vector2i pos){
         Vector2f target(static_cast<float>(pos.x) - sprite.getTextureRect().width, static_cast<float>(pos.y) - sprite.getTextureRect().height);
         sprite.setPosition(target);
     }
-    pos = {sprite.getPosition().x + sprite.getTextureRect().width*1.5, sprite.getPosition().y+10};
+    fix_position();
+}
+
+void Player::fix_position(){
+    FloatRect rect = sprite.getGlobalBounds();
+    rect.top = max(0.f, rect.top);
+    rect.top = min(rect.top, HEIGHT - rect.height);
+    rect.left = max(0.f, rect.left);
+    rect.left = min(rect.left, WIDTH - rect.width);
+    sprite.setPosition(rect.left, rect.top);
+}
+
+Vector2f Player::get_projectile_pos(){
+    return Vector2f(sprite.getPosition().x + sprite.getTextureRect().width*1.5, sprite.getPosition().y+10);
 }
 
 void Player::handle_mouse_press(Vector2i mousePos){
