@@ -20,9 +20,6 @@ Player::~Player(){
 
 void Player::render(RenderWindow &window){
     window.draw(sprite);
-    for(auto p : projectiles){
-        p->render(window);
-    }
 }
 
 void Player::update(Vector2i pos){
@@ -31,13 +28,6 @@ void Player::update(Vector2i pos){
         sprite.setPosition(target);
     }
     pos = {sprite.getPosition().x + sprite.getTextureRect().width*1.5, sprite.getPosition().y+10};
-    if(internal_clock == 0){
-        projectiles.push_back(new Projectile(pos.x, pos.y));
-    }
-    internal_clock = (internal_clock + 1)%100;
-    for(auto p : projectiles){
-        p->update();
-    }
 }
 
 void Player::handle_mouse_press(Vector2i mousePos){
