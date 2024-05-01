@@ -13,7 +13,7 @@ System::System(int width, int height) {
     debug("failed to load music");
   }
   music.setLoop(true);
-  //music.play();
+  music.play();
 }
 
 System::~System() {
