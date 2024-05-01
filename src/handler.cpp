@@ -8,16 +8,27 @@ Handler::~Handler(){
     for(auto p : projectiles){
         delete p;
     }
+    for(auto z : zombies){
+        delete z;
+    }
 }
 
 void Handler::update(){
     Time elapsed = clock.getElapsedTime();
-    if(elapsed.asMilliseconds() >= 500){
+    if(elapsed.asMilliseconds() >= 600){
         clock.restart();
         add_projectile();
     }
+    Time zelapsed = zombie_clock.getElapsedTime();
+    if(zelapsed.asMilliseconds() >= 1200){
+        zombie_clock.restart();
+        add_zombie();
+    }
     for(auto p : projectiles){
         p->update();
+    }
+    for(auto z : zombies){
+        z->update();
     }
     delete_out_of_bounds();
 }
@@ -40,9 +51,17 @@ void Handler::render(RenderWindow &window){
     for(auto p : projectiles){
         p->render(window);
     }
+    for(auto z : zombies){
+        z->render(window);
+    }
 }
 
 void Handler::add_projectile(){
     Projectile* p = new Projectile(player->get_projectile_pos());
     projectiles.push_back(p);
 }   
+
+void Handler::add_zombie(){
+    Zombie* z = new Zombie(Vector2f(WIDTH, rng()%HEIGHT - 60));
+    zombies.push_back(z);
+}
